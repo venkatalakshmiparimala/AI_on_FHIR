@@ -1,0 +1,13 @@
+{
+  "title": "FHIR Query Assistant",
+  "description": "Ask me anything about patients (e.g., \"Show me all cancer patients over 50\")",
+  "submit": "Submit",
+  "input_placeholder": "Enter a medical query...",
+  "empty_input_warning": "Please enter a medical query before submitting.",
+  "backend_connection_error": "Failed to connect to backend",
+  "parsed_query": "Parsed Query",
+  "fhir_response": "FHIR Response",
+  "name": "Name",
+  "age": "Age",
+  "condition": "Condition"
+}

@@ -1,0 +1,14 @@
+{
+    "title": "Asistente de consultas FHIR",
+    "description": "Pregúntame cualquier cosa sobre pacientes (por ejemplo, \"Muéstrame todos los pacientes con cáncer mayores de 50\")",
+    "submit": "Enviar",
+    "input_placeholder": "Ingrese una consulta médica...",
+    "empty_input_warning": "Por favor, ingrese una consulta médica antes de enviarla.",
+    "backend_connection_error": "Error al conectar con el backend",
+    "parsed_query": "Consulta interpretada",
+    "fhir_response": "Respuesta FHIR",
+    "name": "Nombre",
+    "age": "Edad",
+    "condition": "Condición"
+  }
+  
