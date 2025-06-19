@@ -127,59 +127,7 @@ def simulate_fhir_response(parsed):
         "chart_data": chart_data,
         "age_distribution": age_distribution
     }
-    all_patients = [
-        {"name": "Alice Johnson", "age": 62, "condition": "cancer"},
-        {"name": "Bob Lee", "age": 70, "condition": "cancer"},
-        {"name": "Carla Singh", "age": 53, "condition": "cancer"},
-        {"name": "David Nguyen", "age": 67, "condition": "hypertension"},
-        {"name": "Esha Patel", "age": 59, "condition": "asthma"},
-        {"name": "Felix Wang", "age": 45, "condition": "obesity"},
-        {"name": "Gina Torres", "age": 38, "condition": "diabetes"},
-        {"name": "Hector Silva", "age": 29, "condition": "asthma"},
-    ]
 
-    age = parsed.get("age")
-    operator = parsed.get("operator")
-    target_condition = parsed.get("condition")
-
-    # Filter patients based on age
-    if age is not None and operator:
-        if operator == "over":
-            filtered = [p for p in all_patients if p["age"] > age]
-        elif operator == "under":
-            filtered = [p for p in all_patients if p["age"] < age]
-        else:
-            filtered = all_patients
-    else:
-        filtered = all_patients
-
-    # Further filter by condition if present
-    if target_condition:
-        filtered = [p for p in filtered if p["condition"] == target_condition]
-
-    # Build FHIR-like response
-    entries = []
-    for i, p in enumerate(filtered):
-        entries.append({
-            "resource": {
-                "resourceType": "Patient",
-                "id": str(i+1).zfill(3),
-                "name": [{"given": [p["name"].split()[0]], "family": p["name"].split()[1]}],
-                "age": p["age"],
-                "condition": p["condition"]
-            }
-        })
-
-    # Count condition distribution in filtered patients (for chart)
-    condition_counts = Counter([p["condition"] for p in filtered])
-    chart_data = [{"label": cond, "value": count} for cond, count in condition_counts.items()]
-
-    return {
-        "resourceType": "Bundle",
-        "type": "searchset",
-        "entry": entries,
-        "chart_data": chart_data
-    }
 
 @app.route("/query", methods=["POST"])
 def handle_query():
