@@ -128,11 +128,94 @@ The backend API runs inside container at: `http://backend:5000/query`
 
 ---
 
-## Security Notes
-- Input validated on both frontend and backend.
-- CORS enabled on backend.
-- Backend accepts only JSON payloads.
-- All code containerized for isolation.
+**Security & Compliance Plan: HIPAA-Conscious Architecture for AI on FHIR**
+
+This document outlines a technical strategy to ensure HIPAA compliance and secure handling of FHIR-like data within the AI on FHIR project.
+
+---
+
+### 1. Authentication & Authorization
+
+**Mechanism**: OAuth 2.0 + SMART on FHIR (future-ready)
+
+* **Frontend Access Flow**:
+
+  * Planned integration with SMART on FHIR using OAuth 2.0 authorization code flow.
+  * Supports patient-level and provider-level scopes.
+
+* **Token Handling**:
+
+  * Access tokens stored securely in-memory.
+  * No PII or tokens stored in localStorage or transmitted over insecure channels.
+
+---
+
+### 2. Data Privacy & Transport
+
+* **Encryption in Transit**:
+
+  * TLS 1.2+ mandatory between frontend/backend/API.
+
+* **Input Protection**:
+
+  * JSON only (no form/multipart data)
+  * Input queries sanitized server-side
+
+* **Protected Health Information (PHI)**:
+
+  * Currently simulated with fake/mock data
+  * Future real integration to ensure:
+
+    * No PHI is logged or returned unnecessarily
+    * Sensitive identifiers (SSNs, MRNs) are never exposed
+
+* **Audit Logging**:
+
+  * All requests logged with timestamp, IP, language selected, and query intent
+  * Logs shipped to a secure backend for retention (e.g., AWS CloudWatch)
+
+---
+
+### 3. Role-Based Access Control (RBAC)
+
+* **Roles Defined**:
+
+  * Admin (system settings, audit viewing)
+  * Provider (query, chart viewing)
+  * Patient (view own records only - if auth enabled)
+
+* **Enforcement Strategy**:
+
+  * Backend will validate access token scopes to enforce RBAC
+  * Future access control middleware (Flask or FastAPI RBAC decorators)
+
+---
+
+### 4. Containerization & Isolation
+
+* Each service (frontend, backend) runs in a separate Docker container
+* Future enhancements:
+
+  * Use reverse proxy (e.g., Traefik or NGINX) to isolate HTTP requests
+  * Secure inter-service communication with internal Docker networks
+
+---
+
+### 5. Compliance Checklist
+
+| Requirement                         | Status  |
+| ----------------------------------- | ------- |
+| Data encrypted in transit           | Yes     |
+| Minimal PHI exposure                | Yes     |
+| Role-based access support           | Planned |
+| OAuth2-based authentication         | Planned |
+| Audit logs                          | Partial |
+| Containerized and isolated services | Yes     |
+
+---
+
+This strategy sets a foundation to build a production-grade HIPAA-compliant system with scalability and patient data safety in mind.
+
 
 ---
 
