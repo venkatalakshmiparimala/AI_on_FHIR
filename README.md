@@ -144,7 +144,7 @@ The backend API runs inside container at: `http://backend:5000/query`
 ---
 
 ## Authors
-- Developed by [Your Name] for the AI on FHIR Full-Stack Take-Home Assignment.
+- Developed by Venkata Lakshmi Parimala for the AI on FHIR Full-Stack Take-Home Assignment.
 
 ---
 
