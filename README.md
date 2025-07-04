@@ -227,8 +227,7 @@ This strategy sets a foundation to build a production-grade HIPAA-compliant syst
 ---
 
 ## Authors
-- Developed by Venkata Lakshmi Parimala for the AI on FHIR Full-Stack Take-Home Assignment.
+- Developed by Venkata Lakshmi Parimala for the AI on FHIR Full-Stack.
 
 ---
 
-📝 Thank you for reviewing this submission!
